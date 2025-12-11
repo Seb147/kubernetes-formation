@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: hello-world-ingress-tls
+ namespace: hello-world
+spec:
+ tls:
+ - hosts:
+   - hello-world-tls.local
+   secretName: hello-world-tls
+ rules:
+ - host: hello-world-tls.local
+   http:
+     paths:
+     - path: /
+       pathType: Prefix
+       backend:
+         service:
+           name: hello-world-service
+           port:
+             number: 80
