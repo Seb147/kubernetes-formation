@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: hello-world-ingress-certmanager
+ namespace: hello-world
+ annotations:
+  cert-manager.io/issuer: "letsencrypt-formation"
+spec:
+ tls:
+ - hosts:
+   - hello-world-certmanager.local
+   secretName: hello-world-certmanager
+ rules:
+ - host: hello-world-certmanager.local
+   http:
+     paths:
+     - path: /
+       pathType: Prefix
+       backend:
+         service:
+           name: hello-world-service
+           port:
+             number: 80
