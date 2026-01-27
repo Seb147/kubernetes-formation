@@ -15,7 +15,13 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
 ```
 
+# Create Service Account
+kubectl apply -f .
+
+# Generate Bearer Token
+kubectl -n kubernetes-dashboard create token admin-user
+
 # Expose port
 ```
-kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
+kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443 --address [INTERNAL_IP_OF_THE_VM]
 ```
