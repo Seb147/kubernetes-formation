@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world
-  labels:
-    app: web
+  namespace: ns-demo
 spec:
   replicas: 3
   selector:
@@ -19,11 +18,3 @@ spec:
         image: nginx:1.14.2
         ports:
         - containerPort: 80
-          name: nginx-http-port
-        volumeMounts:
-        - name: wwwroot
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: wwwroot
-        configMap:
-          name: hello-world-configmap
