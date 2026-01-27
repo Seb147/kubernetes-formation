@@ -1,10 +1,12 @@
+sudo -i
+
 # Installer k3s sur votre VM :
 curl -sfL https://get.k3s.io | sh -
 
 # Vérifier que le service tourne
 systemctl status k3s.service
 
-k3s kubectl cluster-info
+kubectl cluster-info
 
 # Déployer un « Hello World »
 kubectl create deployment hello-world --image=nginx
@@ -18,7 +20,7 @@ kubectl get pods
 kubectl expose deployment hello-world --type=NodePort --port=80
 
 # Récupérer l'IP
-kubectl get svc -o json | jq -r '.items[] | select(.metadata.name == "hello-world") | .spec.clusterIP'
+CLUSTER_IP=$(kubectl get svc -o json | jq -r '.items[] | select(.metadata.name == "hello-world") | .spec.clusterIP')
 
 # Tester la connexion
-curl http://<YOUR_CLUSTER_IP>
+curl http://${CLUSTER_IP}
