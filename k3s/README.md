@@ -3,6 +3,7 @@ curl -sfL https://get.k3s.io | sh -
 
 # Vérifier que le service tourne
 systemctl status k3s.service
+
 k3s kubectl cluster-info
 
 # Déployer un « Hello World »
@@ -10,6 +11,7 @@ kubectl create deployment hello-world --image=nginx
 
 # Vérifier que tout s’est bien déployé
 kubectl get deployments
+
 kubectl get pods
 
 # Exposer le pod pour pouvoir y accéder
