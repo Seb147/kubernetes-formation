@@ -14,10 +14,9 @@ kubectl get pods
 
 # Exposer le pod pour pouvoir y accéder
 kubectl expose deployment hello-world --type=NodePort --port=80
-kubectl get svc
 
 # Récupérer l'IP
-get svc -o json | jq -r '.items[] | select(.metadata.name == "hello-world") | .spec.clusterIP'
+kubectl get svc -o json | jq -r '.items[] | select(.metadata.name == "hello-world") | .spec.clusterIP'
 
 # Tester la connexion
 curl http://<YOUR_CLUSTER_IP>
